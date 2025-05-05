@@ -30,8 +30,6 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "983787718")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "false").lower() == "true"
 
-DATABASE_URL = postgresql://iot:64IJFFfmc1yasOa4lAfhyJzMXNJp97yA@dpg-d0cgm5q4d50c73chhf0g-a/iot_anti_ddos_db
-
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
