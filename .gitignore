@@ -1,0 +1,13 @@
+# Python
+backend/.venv/
+backend/__pycache__/
+backend/*.sqlite3
+
+# Node / Vite
+frontend/node_modules/
+frontend/dist/
+
+# ОС / IDE
+.DS_Store
+*.log
+.vscode/
