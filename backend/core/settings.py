@@ -108,10 +108,10 @@ DATABASES = {
     #    "HOST": "localhost",
     #    "PORT": "5432",
     #}
-    "default": dj_database_url.parse(
-        os.getenv("DATABASE_URL"),
-        conn_max_age=600,          # для pool внутри gunicorn
-        ssl_require=not DEBUG,     # Render = ssl, локально = нет
+    "default": dj_database_url.config(
+        default="sqlite:///db.sqlite3",   # fallback для локалки
+        conn_max_age=600,
+        ssl_require=not DEBUG,
     )
 }
 
