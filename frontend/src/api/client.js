@@ -1,7 +1,10 @@
 import axios from "axios";
 
+const API_BASE =
+  import.meta.env.VITE_API_URL || "http://localhost:8000";   // dev / prod
+
 export const api = axios.create({
-  baseURL: 'https://iot-anti-ddos.onrender.com/api/',
+  baseURL: API_BASE + "/api",
   withCredentials: true,
 });
 
