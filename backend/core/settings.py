@@ -164,3 +164,8 @@ REST_FRAMEWORK = {
 
 CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
 CORS_ALLOW_CREDENTIALS = True 
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https?:\/\/([a-z0-9-]+\.)*vercel\.app$",
+    r"^https?:\/\/localhost(:\d+)?$",   # чтобы работала локальная разработка
+]
