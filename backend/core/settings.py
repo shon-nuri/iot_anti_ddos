@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +28,9 @@ TELEGRAM_TOKEN   = os.getenv("TELEGRAM_TOKEN", "7849455435:AAGaEoIRwPEgy19Vb-TYE
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "983787718")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "false").lower() == "true"
+
+DATABASE_URL = postgresql://iot:64IJFFfmc1yasOa4lAfhyJzMXNJp97yA@dpg-d0cgm5q4d50c73chhf0g-a/iot_anti_ddos_db
 
 ALLOWED_HOSTS = [
     "localhost",
@@ -99,14 +102,19 @@ CHANNEL_LAYERS = {
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "iot_guardian",
-        "USER": "postgres",
-        "PASSWORD": "1234",
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
+    #"default": {
+    #    "ENGINE": "django.db.backends.postgresql",
+    #    "NAME": "iot_guardian",
+    #    "USER": "postgres",
+    #    "PASSWORD": "1234",
+    #    "HOST": "localhost",
+    #    "PORT": "5432",
+    #}
+    "default": dj_database_url.parse(
+        os.getenv("DATABASE_URL"),
+        conn_max_age=600,          # для pool внутри gunicorn
+        ssl_require=not DEBUG,     # Render = ssl, локально = нет
+    )
 }
 
 
