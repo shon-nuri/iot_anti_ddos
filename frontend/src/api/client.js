@@ -1,12 +1,16 @@
 import axios from "axios";
 
-const API_BASE =
-  import.meta.env.VITE_API_URL || "http://localhost:8000";   // dev / prod
+
+// 1) локально — работает как раньше: VITE_API_URL не задан → localhost
+// 2) на Vercel — в Settings → Environment Variables задаём VITE_API_URL
+const baseURL =
+  import.meta.env.VITE_API_URL?.replace(/\/+$/, "") || "http://localhost:8000";
 
 export const api = axios.create({
-  baseURL: API_BASE + "/api",
+  baseURL: `${baseURL}/api`,        // итог: https://my‑backend.onrender.com/api
   withCredentials: true,
 });
+
 
 // Добавляем токен в каждый запрос
 api.interceptors.request.use((config) => {

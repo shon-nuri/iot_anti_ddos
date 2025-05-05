@@ -9,26 +9,40 @@ export default function SignUp() {
   const navigate = useNavigate();
   const setUser = useAuth((s) => s.setUser);
 
-  const handleSubmit = async (e) => {
+  // --- та же компонента, только несколько мелких правок ------------------
+    const [error, setError] = useState("");
+
+    const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    if (!form.email || !form.password) {
+        setError("Введите email и пароль");
+        return;
+    }
     setLoading(true);
     try {
-      const { data } = await api.post("/auth/signup/", form);
+        const { data } = await api.post("/auth/signup/", form);
 
-      // сохраняем токены
-      localStorage.setItem("access", data.access);
-      localStorage.setItem("refresh", data.refresh);
+        localStorage.setItem("access", data.access);
+        localStorage.setItem("refresh", data.refresh);
+        setUser(data.user);
 
-      // кладём пользователя в zustand‑store
-      setUser(data.user);
-
-      navigate("/dashboard");
+        navigate("/dashboard");
     } catch (err) {
-      alert(err.response?.data?.detail || "Ошибка регистрации");
+        setError(
+        err.response?.data?.detail ||
+        err.response?.data?.email?.[0] ||
+        "Ошибка регистрации"
+        );
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+    };
+    
+    {error && (
+    <p className="text-red-400 text-center text-sm mb-4">{error}</p>
+    )}
+
 
   return (
     <div className="h-screen flex items-center justify-center bg-gray-900">

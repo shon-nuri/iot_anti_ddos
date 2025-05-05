@@ -54,6 +54,7 @@ INSTALLED_APPS = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "https://iotantiddos1.vercel.app",
+    "https://iotantiddos1-jageox7he-shons-projects-edab9dfb.vercel.app"
 ]
 
 MIDDLEWARE = [
@@ -161,6 +162,5 @@ REST_FRAMEWORK = {
 }
 
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:5173", "https://iotantiddos1.vercel.app"]
-
+CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
 CORS_ALLOW_CREDENTIALS = True 
