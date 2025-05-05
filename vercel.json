@@ -2,7 +2,7 @@
     "crons": [
       {
         "path": "/api/emulator",     
-        "schedule": "*/5 * * * *"    
+        "schedule": "* 12 * * * *"    
       }
     ]
   }
