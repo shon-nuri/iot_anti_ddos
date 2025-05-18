@@ -108,6 +108,10 @@ def block_ip(request):
 
 
 class DDoSLogView(APIView):
+<<<<<<< HEAD
+=======
+    permission_classes = [IsAuthenticated]
+>>>>>>> e4e30d13eddf95831a4b60ae51002cbd2da9713f
 
     def get(self, request):
         logs = DDoSLog.objects.all().order_by("-timestamp")[:100]
