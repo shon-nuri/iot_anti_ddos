@@ -1,0 +1,9 @@
+{
+    "crons": [
+      {
+        "path": "/api/emulator",     
+        "schedule": "0 12 * * *"    
+      }
+    ]
+  }
+  
